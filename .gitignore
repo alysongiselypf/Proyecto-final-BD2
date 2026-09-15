@@ -1,0 +1,23 @@
+# Binarios compilados de la extension C
+extension/*.o
+extension/*.bc
+extension/*.so
+extension/tests/*.exe
+extension/tests/test_hash
+extension/tests/test_persist
+extension/tests/test_search
+extension/tests/test_split
+
+# Datos del indice persistido (se genera en runtime, no debe versionarse)
+*.dat
+
+# Volumen de Docker / datos de Postgres si algo se genera localmente
+pgdata/
+
+# Archivos temporales de Windows
+Thumbs.db
+desktop.ini
+
+# Logs
+log.txt
+*.log

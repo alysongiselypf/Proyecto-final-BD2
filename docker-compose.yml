@@ -1,0 +1,27 @@
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: extension/Dockerfile
+    container_name: farmacia_pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: farmacia_user
+      POSTGRES_PASSWORD: farmacia_pass
+      POSTGRES_DB: farmacia_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+      - ./extension/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./extension/02_create_extension.sql:/docker-entrypoint-initdb.d/02_create_extension.sql
+      - ./extension/03_create_eh_extension.sql:/docker-entrypoint-initdb.d/03_create_eh_extension.sql
+      - ./extension/04_create_trigger.sql:/docker-entrypoint-initdb.d/04_create_trigger.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U farmacia_user -d farmacia_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
