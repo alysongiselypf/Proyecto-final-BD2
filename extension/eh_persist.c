@@ -18,9 +18,12 @@ bool eh_directory_save(Directory *dir, const char *path)
     int num_unique = 0;
     int i, j;
     uint32_t magic = EH_MAGIC;
+    char tmp_path[1024];
 
     if (dir == NULL)
         return false;
+
+    snprintf(tmp_path, sizeof(tmp_path), "%s.tmp", path);
 
     unique = malloc(sizeof(Bucket*) * dir->num_slots);
     slot_bucket_id = malloc(sizeof(int) * dir->num_slots);
@@ -38,7 +41,7 @@ bool eh_directory_save(Directory *dir, const char *path)
         slot_bucket_id[i] = found_id;
     }
 
-    f = fopen(path, "wb");
+    f = fopen(tmp_path, "wb");
     if (f == NULL) {
         free(unique); free(slot_bucket_id);
         return false;
@@ -60,6 +63,14 @@ bool eh_directory_save(Directory *dir, const char *path)
     fclose(f);
     free(unique);
     free(slot_bucket_id);
+
+    // Escritura atomica: solo reemplaza el archivo final si todo se escribio bien.
+    // Si el proceso se interrumpe antes de este punto, el archivo original
+    // (eh_index.dat) permanece intacto.
+    if (rename(tmp_path, path) != 0) {
+        return false;
+    }
+
     return true;
 }
 
