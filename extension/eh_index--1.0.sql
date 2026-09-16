@@ -26,6 +26,14 @@ CREATE FUNCTION eh_sync_trigger() RETURNS trigger
 AS 'MODULE_PATHNAME', 'eh_sync_trigger'
 LANGUAGE C;
 
+CREATE FUNCTION eh_build_table(text, text) RETURNS boolean
+AS 'MODULE_PATHNAME', 'eh_build_table'
+LANGUAGE C STRICT;
+
+CREATE FUNCTION eh_index_size() RETURNS bigint
+AS 'MODULE_PATHNAME', 'eh_index_size'
+LANGUAGE C STRICT;
+
 
 
 

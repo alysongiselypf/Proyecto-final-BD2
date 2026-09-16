@@ -1,4 +1,6 @@
+#include "postgres.h"
 #include "eh_insert_core.h"
+#include "eh_types.h"
 #include "eh_hash.h"
 #include "eh_bucket.h"
 #include "eh_directory.h"
@@ -16,6 +18,9 @@ int eh_directory_insert(Directory *dir, int32_t key, int64_t tid)
         uint32_t h = hash_function(key);
         int idx = directory_index(dir, h);
         Bucket *b = dir->slots[idx];
+
+        elog(LOG, "DEBUG key=%d idx=%d bucket_id=%d count=%d capacity=%d local_depth=%d global_depth=%d",
+             key, idx, b->id, b->count, BUCKET_CAPACITY, b->local_depth, dir->global_depth);
 
         if (bucket_contains(b, key))
             return 0; // duplicado, no se inserta de nuevo

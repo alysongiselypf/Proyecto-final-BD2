@@ -2,11 +2,14 @@
 #include "fmgr.h"
 #include "eh_types.h"
 #include "eh_persist.h"
+#include <sys/stat.h>
 
 extern Directory *g_index;  // definida en eh_build.c
 
 PG_FUNCTION_INFO_V1(eh_save);
 PG_FUNCTION_INFO_V1(eh_load);
+PG_FUNCTION_INFO_V1(eh_index_size);
+
 
 Datum
 eh_save(PG_FUNCTION_ARGS)
@@ -33,3 +36,13 @@ eh_load(PG_FUNCTION_ARGS)
          g_index->global_depth, g_index->num_slots);
     PG_RETURN_BOOL(true);
 }
+
+Datum
+eh_index_size(PG_FUNCTION_ARGS)
+{
+    struct stat st;
+    if (stat(EH_INDEX_FILE_PATH, &st) != 0)
+        PG_RETURN_INT64(0);
+    PG_RETURN_INT64((int64) st.st_size);
+}
+

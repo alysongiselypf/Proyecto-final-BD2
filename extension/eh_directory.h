@@ -7,5 +7,6 @@ Directory *directory_create(int initial_global_depth);
 void directory_free(Directory *dir);
 int directory_index(Directory *dir, uint32_t hash);
 void directory_double(Directory *dir);
+void directory_free_all(Directory *dir);
 
 #endif

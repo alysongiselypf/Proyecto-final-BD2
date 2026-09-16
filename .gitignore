@@ -21,3 +21,15 @@ desktop.ini
 # Logs
 log.txt
 *.log
+
+# Datasets generados (grandes, reproducibles via generadores)
+datasets/output/*.csv
+datasets/output/*.json
+datasets/output/graficos/*.png
+
+# Cache de Python
+__pycache__/
+*.pyc
+
+# Resultados de benchmark (reproducibles, no versionar)
+build_full.log

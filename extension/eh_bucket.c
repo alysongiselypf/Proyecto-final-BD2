@@ -1,12 +1,20 @@
+#include "postgres.h"
 #include "eh_bucket.h"
 #include <stdlib.h>
 #include <string.h>
 
+static int g_next_bucket_id = 0;  // contador global, agregar arriba de bucket_create
+
 Bucket *bucket_create(int local_depth) {
     Bucket *b = malloc(sizeof(Bucket));
+    b->id = g_next_bucket_id++;
     b->local_depth = local_depth;
     b->count = 0;
     memset(b->entries, 0, sizeof(b->entries));
+
+    if (b->id % 50000 == 0)
+        elog(LOG, "bucket_create: van %d buckets creados (local_depth=%d)", b->id, local_depth);
+
     return b;
 }
 
@@ -44,4 +52,9 @@ bool bucket_contains(Bucket *b, int32_t key) {
     int64_t dummy;
     return bucket_find(b, key, &dummy) == 1;
 }
+
+void bucket_reset_id_counter(void) {
+    g_next_bucket_id = 0;
+}
+
 

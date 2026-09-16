@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define BUCKET_CAPACITY 4
+#define BUCKET_CAPACITY 64
 
 typedef struct {
     int32_t key;   // medicamento.id
@@ -11,12 +11,14 @@ typedef struct {
 } Entry;
 
 typedef struct {
+    int id;              // debe estar aquí, como primera línea
     int local_depth;
     int count;
     Entry entries[BUCKET_CAPACITY];
 } Bucket;
 
 typedef struct {
+    int id;
     int global_depth;
     int num_slots;
     Bucket **slots;

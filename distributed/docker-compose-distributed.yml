@@ -1,0 +1,59 @@
+services:
+  nodeA:
+    image: postgres:18.6
+    container_name: farmacia_nodeA
+    environment:
+      POSTGRES_USER: farmacia_user
+      POSTGRES_PASSWORD: farmacia_pass
+      POSTGRES_DB: farmacia_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - nodeA_data:/var/lib/postgresql
+      - ./schema_distributed.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U farmacia_user -d farmacia_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nodeB:
+    image: postgres:18.6
+    container_name: farmacia_nodeB
+    environment:
+      POSTGRES_USER: farmacia_user
+      POSTGRES_PASSWORD: farmacia_pass
+      POSTGRES_DB: farmacia_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - nodeB_data:/var/lib/postgresql
+      - ./schema_distributed.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U farmacia_user -d farmacia_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nodeC:
+    image: postgres:18.6
+    container_name: farmacia_nodeC
+    environment:
+      POSTGRES_USER: farmacia_user
+      POSTGRES_PASSWORD: farmacia_pass
+      POSTGRES_DB: farmacia_db
+    ports:
+      - "5435:5432"
+    volumes:
+      - nodeC_data:/var/lib/postgresql
+      - ./schema_distributed.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U farmacia_user -d farmacia_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  nodeA_data:
+  nodeB_data:
+  nodeC_data:

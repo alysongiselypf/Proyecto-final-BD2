@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EH_MAGIC 0x45484631u  // "EHF1", identifica el formato del archivo
-
+#define EH_MAGIC 0x45484632u  // "EHF2" - version 2 del formato (agrega campo 'id' al bucket)
 /*
  * Guardado (Fiorella). Varios slots del directorio pueden compartir
  * el mismo bucket (punteros repetidos), asi que primero se identifica
@@ -13,37 +12,37 @@
 bool eh_directory_save(Directory *dir, const char *path)
 {
     FILE *f;
-    Bucket **unique;
-    int *slot_bucket_id;
-    int num_unique = 0;
-    int i, j;
+    int *slot_bucket_id;      // el ID real del bucket (no compactado)
+    int i;
     uint32_t magic = EH_MAGIC;
-    char tmp_path[1024];
 
-    if (dir == NULL)
-        return false;
+    // Estructura temporal: mapa de id_real -> puntero, usando un arreglo
+    // dimensionado al mayor id visto, para evitar busqueda O(n) por slot.
+    int max_id = -1;
+    for (i = 0; i < dir->num_slots; i++) {
+        if (dir->slots[i]->id > max_id)
+            max_id = dir->slots[i]->id;
+    }
 
-    snprintf(tmp_path, sizeof(tmp_path), "%s.tmp", path);
+    Bucket **by_id = calloc(max_id + 1, sizeof(Bucket*));
+    bool *seen = calloc(max_id + 1, sizeof(bool));
+    int num_unique = 0;
 
-    unique = malloc(sizeof(Bucket*) * dir->num_slots);
     slot_bucket_id = malloc(sizeof(int) * dir->num_slots);
 
     for (i = 0; i < dir->num_slots; i++) {
-        int found_id = -1;
-        for (j = 0; j < num_unique; j++) {
-            if (unique[j] == dir->slots[i]) { found_id = j; break; }
-        }
-        if (found_id == -1) {
-            unique[num_unique] = dir->slots[i];
-            found_id = num_unique;
+        Bucket *b = dir->slots[i];
+        slot_bucket_id[i] = b->id;
+        if (!seen[b->id]) {
+            seen[b->id] = true;
+            by_id[b->id] = b;
             num_unique++;
         }
-        slot_bucket_id[i] = found_id;
     }
 
-    f = fopen(tmp_path, "wb");
+    f = fopen(path, "wb");
     if (f == NULL) {
-        free(unique); free(slot_bucket_id);
+        free(slot_bucket_id); free(by_id); free(seen);
         return false;
     }
 
@@ -53,24 +52,21 @@ bool eh_directory_save(Directory *dir, const char *path)
     fwrite(slot_bucket_id, sizeof(int), dir->num_slots, f);
     fwrite(&num_unique, sizeof(int), 1, f);
 
-    for (j = 0; j < num_unique; j++) {
-        Bucket *b = unique[j];
+    // Escribir cada bucket unico junto con su ID real, para poder
+    // reconstruir la relacion slot -> bucket al cargar.
+    for (i = 0; i <= max_id; i++) {
+        if (!seen[i]) continue;
+        Bucket *b = by_id[i];
+        fwrite(&b->id, sizeof(int), 1, f);
         fwrite(&b->local_depth, sizeof(int), 1, f);
         fwrite(&b->count, sizeof(int), 1, f);
         fwrite(b->entries, sizeof(Entry), b->count, f);
     }
 
     fclose(f);
-    free(unique);
     free(slot_bucket_id);
-
-    // Escritura atomica: solo reemplaza el archivo final si todo se escribio bien.
-    // Si el proceso se interrumpe antes de este punto, el archivo original
-    // (eh_index.dat) permanece intacto.
-    if (rename(tmp_path, path) != 0) {
-        return false;
-    }
-
+    free(by_id);
+    free(seen);
     return true;
 }
 
@@ -85,17 +81,17 @@ Directory *eh_directory_load(const char *path)
     uint32_t magic;
     Directory *dir;
     int *slot_bucket_id;
-    Bucket **buckets;
     int num_unique;
     int i;
+    int max_id = -1;
 
     f = fopen(path, "rb");
     if (f == NULL)
-        return NULL;  // no hay indice persistido todavia (arranque en frio)
+        return NULL;
 
     if (fread(&magic, sizeof(uint32_t), 1, f) != 1 || magic != EH_MAGIC) {
         fclose(f);
-        return NULL;  // archivo corrupto o de formato incompatible
+        return NULL;
     }
 
     dir = malloc(sizeof(Directory));
@@ -106,22 +102,29 @@ Directory *eh_directory_load(const char *path)
     fread(slot_bucket_id, sizeof(int), dir->num_slots, f);
 
     fread(&num_unique, sizeof(int), 1, f);
-    buckets = malloc(sizeof(Bucket*) * num_unique);
+
+    for (i = 0; i < dir->num_slots; i++)
+        if (slot_bucket_id[i] > max_id) max_id = slot_bucket_id[i];
+
+    Bucket **by_id = calloc(max_id + 1, sizeof(Bucket*));
 
     for (i = 0; i < num_unique; i++) {
+        int stored_id;
         Bucket *b = malloc(sizeof(Bucket));
+        fread(&stored_id, sizeof(int), 1, f);
+        b->id = stored_id;
         fread(&b->local_depth, sizeof(int), 1, f);
         fread(&b->count, sizeof(int), 1, f);
         fread(b->entries, sizeof(Entry), b->count, f);
-        buckets[i] = b;
+        by_id[stored_id] = b;
     }
 
     dir->slots = malloc(sizeof(Bucket*) * dir->num_slots);
     for (i = 0; i < dir->num_slots; i++)
-        dir->slots[i] = buckets[slot_bucket_id[i]];
+        dir->slots[i] = by_id[slot_bucket_id[i]];
 
     free(slot_bucket_id);
-    free(buckets);
+    free(by_id);
     fclose(f);
     return dir;
 }
