@@ -64,7 +64,7 @@ equipo.
 
 ## Semana 2 — Entorno + Prueba de concepto en C + Diseño de estructuras
 
-### Entorno de trabajo (Fiorella)
+### Entorno de trabajo 
 Se configuró un proyecto Docker separado del repositorio de Software 2,
 con PostgreSQL 18.6 sobre contenedor Linux (cumpliendo la sección 8 de
 la rúbrica). Se tradujo el esquema original de MariaDB a PostgreSQL,
@@ -88,7 +88,7 @@ vía `CREATE EXTENSION` → ejecución desde SQL. Función de prueba:
 
 **Archivos:** `extension/hello_pg.c`, `hello_pg.control`, `hello_pg--1.0.sql`, `Makefile`, `Dockerfile`
 
-### Diseño de estructuras (Edison, Rodrigo, Alyson)
+### Diseño de estructuras (Rodrigo, Alyson)
 Se documentó en detalle, antes de escribir código, el diseño de:
 - **Directorio** (Edison): arreglo de punteros a buckets, indexado por
   los `global_depth` bits menos significativos del hash; mecanismo de
