@@ -58,7 +58,7 @@ propuesta formal, incluyendo: motivación, referencias (Fagin et al.
 en C), riesgos técnicos identificados y plan de trabajo semanal del
 equipo.
 
-**Archivo:** `Propuesta_Inicial.pdf` *(no forma parte del código, entregado por separado)*
+**Archivo:** `Propuesta_Inicial.pdf` 
 
 ---
 
