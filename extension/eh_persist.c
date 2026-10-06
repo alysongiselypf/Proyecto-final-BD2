@@ -4,7 +4,7 @@
 
 #define EH_MAGIC 0x45484632u  // "EHF2" - version 2 del formato (agrega campo 'id' al bucket)
 /*
- * Guardado (Fiorella). Varios slots del directorio pueden compartir
+ * Varios slots del directorio pueden compartir
  * el mismo bucket (punteros repetidos), asi que primero se identifica
  * la lista de buckets UNICOS antes de escribir, para no duplicar
  * datos en disco.
@@ -71,7 +71,7 @@ bool eh_directory_save(Directory *dir, const char *path)
 }
 
 /*
- * Carga (Ruth). Reconstruye primero los buckets unicos, y luego
+ * Reconstruye primero los buckets unicos, y luego
  * reconecta cada slot del directorio a su bucket correspondiente
  * usando los IDs guardados en el archivo.
  */
