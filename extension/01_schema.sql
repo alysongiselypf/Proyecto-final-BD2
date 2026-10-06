@@ -1,7 +1,5 @@
--- =========================================================
 -- Esquema Farmacia — traducido de MariaDB a PostgreSQL 18
 -- Proyecto Final BD2: Extendible Hashing sobre PostgreSQL
--- =========================================================
 
 DROP TABLE IF EXISTS usuario CASCADE;
 CREATE TABLE usuario (
