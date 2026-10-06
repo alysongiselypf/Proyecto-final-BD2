@@ -1,7 +1,13 @@
+#ifdef EH_STANDALONE
+#include "pg_shim.h"
+#else
 #include "postgres.h"
+#endif
+
 #include "eh_directory.h"
 #include "eh_bucket.h"
 #include <stdlib.h>
+
 
 Directory *directory_create(int initial_global_depth) {
     bucket_reset_id_counter();

@@ -1,4 +1,9 @@
+#ifdef EH_STANDALONE
+#include "pg_shim.h"
+#else
 #include "postgres.h"
+#endif
+
 #include "eh_insert_core.h"
 #include "eh_types.h"
 #include "eh_hash.h"
@@ -9,7 +14,7 @@
 int eh_directory_insert(Directory *dir, int32_t key, int64_t tid)
 {
     // Limite de seguridad: evita un loop infinito si un bug de split
-    // dejara el bucket destino siempre lleno 
+    // dejara el bucket destino siempre lleno
     int max_iterations = 32;
 
     while (max_iterations-- > 0)

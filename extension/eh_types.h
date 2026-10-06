@@ -3,7 +3,10 @@
 
 #include <stdint.h>
 
-#define BUCKET_CAPACITY 64
+#ifndef BUCKET_CAPACITY
+#define BUCKET_CAPACITY 4
+#endif
+
 
 typedef struct {
     int32_t key;   // medicamento.id

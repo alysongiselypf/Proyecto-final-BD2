@@ -1,4 +1,9 @@
+#ifdef EH_STANDALONE
+#include "pg_shim.h"
+#else
 #include "postgres.h"
+#endif
+
 #include "eh_bucket.h"
 #include <stdlib.h>
 #include <string.h>
