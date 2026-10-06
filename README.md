@@ -258,6 +258,7 @@ farmacia-bd2/
 │   └── schema_postgres.sql        # Esquema base (7 tablas)
 ├── extension/
 │   ├── eh_types.h                  # Structs: Directory, Bucket, Entry
+│   ├── pg_shim.h                   # Reemplazo de postgres.h para compilar tests sin PostgreSQL
 │   ├── eh_hash.c / eh_hash.h       # Funcion hash (Semana 3)
 │   ├── eh_bucket.c / eh_bucket.h   # Operaciones sobre buckets (Semana 3)
 │   ├── eh_directory.c / eh_directory.h  # Operaciones sobre directorio (Semana 3)
@@ -287,14 +288,20 @@ farmacia-bd2/
 └── README.md
 ```
 
-## Cómo correr los tests unitarios (sin Docker, C puro)
+## Cómo correr los tests unitarios (C puro, sin Docker ni PostgreSQL)
+
+Requiere `gcc`. Los tests usan `extension/pg_shim.h`, que reemplaza las
+funciones de PostgreSQL (`palloc`, `elog`, etc.) al compilar con `-DEH_STANDALONE`.
+La capacidad de bucket por defecto es 4 (`BUCKET_CAPACITY` en `eh_types.h`).
 
 ```bash
 cd extension/tests
-gcc test_hash.c ../eh_hash.c -o test_hash && ./test_hash
-gcc test_search.c ../eh_hash.c ../eh_bucket.c ../eh_directory.c -o test_search && ./test_search
-gcc test_split.c ../eh_hash.c ../eh_bucket.c ../eh_directory.c ../eh_split.c ../eh_insert_core.c -o test_split && ./test_split
+gcc -DEH_STANDALONE -I.. test_hash.c ../eh_hash.c -o test_hash && ./test_hash
+gcc -DEH_STANDALONE -I.. test_search.c ../eh_hash.c ../eh_bucket.c ../eh_directory.c -o test_search && ./test_search
+gcc -DEH_STANDALONE -I.. test_split.c ../eh_hash.c ../eh_bucket.c ../eh_directory.c ../eh_split.c ../eh_insert_core.c -o test_split && ./test_split
 ```
+
+Resultado esperado: todos los tests pasan y `test_split` termina con profundidad global 5.
 
 ## Recursos externos utilizados
 
@@ -317,4 +324,6 @@ del equipo.
   System Concepts* (7ª ed.).
 - Documentación oficial de PostgreSQL 18 — Index Access Method
   Interface, C-Language Functions.
-  
+
+
+
