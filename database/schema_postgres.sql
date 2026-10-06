@@ -1,11 +1,7 @@
--- =========================================================
 -- Esquema Farmacia — traducido de MariaDB a PostgreSQL 18
 -- Proyecto Final BD2: Extendible Hashing sobre PostgreSQL
--- =========================================================
 
--- ---------------------------------------------------------
 -- Tabla: usuario  (clientes / pacientes / doctores)
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS usuario CASCADE;
 CREATE TABLE usuario (
     id                INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -23,9 +19,7 @@ CREATE TABLE usuario (
     creado_en         TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- ---------------------------------------------------------
 -- Tabla: medicamento  (productos — clave a indexar con Extendible Hashing)
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS medicamento CASCADE;
 CREATE TABLE medicamento (
     id      INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -38,9 +32,7 @@ CREATE TABLE medicamento (
               CHECK (tipo IN ('medicamento','suplemento'))
 );
 
--- ---------------------------------------------------------
 -- Tabla: pedido
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS pedido CASCADE;
 CREATE TABLE pedido (
     id            INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -54,9 +46,7 @@ CREATE TABLE pedido (
     estado        VARCHAR(30) DEFAULT 'completado'
 );
 
--- ---------------------------------------------------------
 -- Tabla: detalle_pedido
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS detalle_pedido CASCADE;
 CREATE TABLE detalle_pedido (
     id               INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -68,9 +58,7 @@ CREATE TABLE detalle_pedido (
     subtotal         NUMERIC(10,2)
 );
 
--- ---------------------------------------------------------
 -- Tabla: cita
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS cita CASCADE;
 CREATE TABLE cita (
     id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -84,9 +72,7 @@ CREATE TABLE cita (
     creado_en   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- ---------------------------------------------------------
 -- Tabla: consulta
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS consulta CASCADE;
 CREATE TABLE consulta (
     id              INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -99,9 +85,7 @@ CREATE TABLE consulta (
     creado_en       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- ---------------------------------------------------------
 -- Tabla: receta
--- ---------------------------------------------------------
 DROP TABLE IF EXISTS receta CASCADE;
 CREATE TABLE receta (
     id              INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -112,9 +96,7 @@ CREATE TABLE receta (
     creado_en       TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
--- =========================================================
 -- Datos de ejemplo (tal como estaban en farmacia_db.sql)
--- =========================================================
 
 INSERT INTO usuario (tipo_documento, numero_documento, fecha_nacimiento, nombres, apellidos, telefono, password, rol, especialidad, id_departamento, creado_en) VALUES
 ('DNI','72471842','2004-11-24','Alyson','Perez Flores','999444777','$2y$10$yZnO3FZ6Ny8eGLfjnysUSum7H0ojih8D2GNJo4IT7mRqgp8wtwNfy','paciente',NULL,NULL,'2026-06-18 22:39:19'),
