@@ -9,8 +9,7 @@
 int eh_directory_insert(Directory *dir, int32_t key, int64_t tid)
 {
     // Limite de seguridad: evita un loop infinito si un bug de split
-    // dejara el bucket destino siempre lleno (edge case documentado
-    // por Alyson: overflow).
+    // dejara el bucket destino siempre lleno 
     int max_iterations = 32;
 
     while (max_iterations-- > 0)
