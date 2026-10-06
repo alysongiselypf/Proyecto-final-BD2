@@ -104,11 +104,16 @@ def fragmentar_por_hash():
         print(f"[HASH] Node {node}: {len(filas)} pedidos")
 
 if __name__ == "__main__":
-    print("--- Replicando usuario y medicamento (tablas pequeñas) ---")
-    generar_usuarios_y_medicamentos()
+    import sys
+    estrategia = sys.argv[1] if len(sys.argv) > 1 else "rango"
 
-    print("\n--- Estrategia 1: fragmentacion por RANGO ---")
-    fragmentar_por_rango()
-
-    print("\n--- Estrategia 2: fragmentacion por HASH ---")
-    print("(Nota: esto sobrescribe 'pedido'; correr esta funcion SOLA si se quiere probar Hash en vez de Rango)")
+    if estrategia == "rango":
+        print("--- Replicando usuario y medicamento (tablas pequeñas) ---")
+        generar_usuarios_y_medicamentos()
+        print("\n--- Estrategia 1: fragmentacion por RANGO ---")
+        fragmentar_por_rango()
+    elif estrategia == "hash":
+        print("--- Estrategia 2: fragmentacion por HASH ---")
+        fragmentar_por_hash()
+    else:
+        print("Uso: python fragment_data.py [rango|hash]")
