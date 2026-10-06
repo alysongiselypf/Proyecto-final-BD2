@@ -14,13 +14,7 @@ parcial práctico según la sección 5 de la rúbrica del curso.
 
 ## Integrantes
 
-| Integrante | Rol principal en el proyecto |
-|---|---|
-| Fiorella Flores | Entorno Docker, `eh_build()`, integración general |
-| Ruth Benique | Prueba de concepto en C, lectura de datos vía SPI, registro de funciones en PostgreSQL |
-| Edison Cama | Estructura de directorio, `eh_insert()` |
-| Rodrigo Sierra | Estructura de buckets, tests unitarios |
-| Alyson Perez | Función hash, documentación técnica, casos edge |
+Rodrigo Sierra, Alyson Perez y Ruth Benique.
 
 ## Requisitos previos
 
@@ -80,7 +74,7 @@ corrigió en `docker-compose.yml`.
 
 **Archivos:** `docker-compose.yml`, `database/schema_postgres.sql`
 
-### Prueba de concepto: función en C dentro de PostgreSQL (Ruth)
+### Prueba de concepto: función en C dentro de PostgreSQL
 Se implementó y verificó el mecanismo completo de extensión en C:
 compilación dentro del contenedor → generación de `.so` → registro
 vía `CREATE EXTENSION` → ejecución desde SQL. Función de prueba:
@@ -88,14 +82,14 @@ vía `CREATE EXTENSION` → ejecución desde SQL. Función de prueba:
 
 **Archivos:** `extension/hello_pg.c`, `hello_pg.control`, `hello_pg--1.0.sql`, `Makefile`, `Dockerfile`
 
-### Diseño de estructuras (Rodrigo, Alyson)
+### Diseño de estructuras
 Se documentó en detalle, antes de escribir código, el diseño de:
-- **Directorio** (Edison): arreglo de punteros a buckets, indexado por
+- **Directorio**: arreglo de punteros a buckets, indexado por
   los `global_depth` bits menos significativos del hash; mecanismo de
   duplicación (`directory_double`).
-- **Buckets** (Rodrigo): páginas de capacidad fija con pares
+- **Buckets**: páginas de capacidad fija con pares
   clave-TID, `local_depth` propio, lógica de split.
-- **Función hash** (Alyson): función multiplicativa de Knuth
+- **Función hash**: función multiplicativa de Knuth
   (`hash = clave * 2654435761 mod 2^32`), justificación de uso de bits
   menos significativos según la convención de Fagin et al. (1979).
 
@@ -108,18 +102,18 @@ Se documentó en detalle, antes de escribir código, el diseño de:
 Se implementó en C el núcleo de la estructura, compilable e integrable:
 
 - **`eh_types.h`**: structs compartidos (`Directory`, `Bucket`, `Entry`).
-- **`eh_hash.c/.h`** (Alyson): función hash implementada, validada con
+- **`eh_hash.c/.h`**: función hash implementada, validada con
   tests unitarios en C puro (`tests/test_hash.c`, corrido sin
   PostgreSQL vía `gcc`), incluyendo verificación de distribución real
   sobre los 23 medicamentos del dataset (resultado: 5/6/6/6 entre 4 slots).
-- **`eh_bucket.c/.h`** (Rodrigo): `bucket_create`, `bucket_is_full`,
+- **`eh_bucket.c/.h`**: `bucket_create`, `bucket_is_full`,
   `bucket_insert_raw`, `bucket_find`.
-- **`eh_directory.c/.h`** (Edison): `directory_create`,
+- **`eh_directory.c/.h`**: `directory_create`,
   `directory_index`, `directory_double`.
-- **`eh_load_data.c`** (Ruth): lectura de datos reales desde
+- **`eh_load_data.c`**: lectura de datos reales desde
   PostgreSQL vía SPI (`eh_count_source_rows`), verificada contra la
   tabla `medicamento` (23 filas leídas correctamente).
-- **`eh_build.c`** (Fiorella): esqueleto de `eh_build()`, registrado en
+- **`eh_build.c`**: esqueleto de `eh_build()`, registrado en
   PostgreSQL, verificado con `NOTICE: gd=2, 4 slots`.
 
 **Incidencia resuelta:** PostgreSQL rechazó inicialmente la librería
@@ -131,17 +125,17 @@ compilada (`missing magic block`) por falta de la macro
 
 ## Semana 4 — Búsqueda
 
-- **`eh_search()`** (Fiorella): implementada, calcula hash, localiza
+- **`eh_search()`**: implementada, calcula hash, localiza
   slot y bucket, retorna TID o `NULL`.
-- **Registro formal en PostgreSQL** (Ruth): `eh_index--1.0.sql`
+- **Registro formal en PostgreSQL**: `eh_index--1.0.sql`
   actualizado con `CREATE FUNCTION eh_search`.
-- **Tests unitarios de búsqueda** (Edison): `tests/test_search.c`,
+- **Tests unitarios de búsqueda**: `tests/test_search.c`,
   5 casos (búsqueda exitosa/no exitosa, duplicados, determinismo,
   bucket lleno).
-- **Manejo de colisiones/edge cases** (Rodrigo): `bucket_contains()`
+- **Manejo de colisiones/edge cases**: `bucket_contains()`
   para evitar duplicados; `bucket_insert_raw()` rechaza inserción en
   bucket lleno de forma controlada.
-- **Documentación técnica parcial** (Alyson):
+- **Documentación técnica parcial**:
   `diseno/documentacion_tecnica_parcial.md`.
 
 **Hallazgo documentado:** se identificó que el índice en memoria no
@@ -159,22 +153,22 @@ comportamiento esperado en esta etapa del desarrollo.
 
 ## Semana 5 — Inserción + split
 
-- **Split de bucket, caso `local_depth < global_depth`** (Fiorella):
+- **Split de bucket, caso `local_depth < global_depth`**:
   `eh_split.c`, redistribuye entradas según el bit adicional del hash,
   actualiza únicamente los slots del directorio que correspondían al
   bucket dividido.
-- **Duplicación de directorio, caso `local_depth == global_depth`**
-  (Ruth): `eh_insert_core.c`, función central `eh_directory_insert()`
+- **Duplicación de directorio, caso `local_depth == global_depth`**:
+  `eh_insert_core.c`, función central `eh_directory_insert()`
   que decide si duplicar el directorio antes de hacer el split,
   con límite de seguridad de 32 iteraciones para evitar loops
   infinitos ante bugs no previstos.
-- **`eh_insert()` integración** (Edison): registrada en PostgreSQL,
+- **`eh_insert()` integración**: registrada en PostgreSQL,
   invocable desde SQL.
-- **Tests de split/duplicación** (Rodrigo): `tests/test_split.c`,
+- **Tests de split/duplicación**: `tests/test_split.c`,
   4 casos, incluyendo verificación de que las 23 claves se insertan
   completas (vs. las 4 de la Semana 4) y son recuperables tras los
   splits.
-- **Casos edge: overflow y duplicados** (Alyson):
+- **Casos edge: overflow y duplicados**:
   `diseno/casos_edge_semana5.md`.
 
 **Resultado de cierre de la Etapa I:** `eh_build()` sobre las 23 claves
@@ -263,3 +257,4 @@ del equipo.
   System Concepts* (7ª ed.).
 - Documentación oficial de PostgreSQL 18 — Index Access Method
   Interface, C-Language Functions.
+  
