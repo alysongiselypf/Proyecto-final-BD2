@@ -14,7 +14,9 @@ parcial práctico según la sección 5 de la rúbrica del curso.
 
 ## Integrantes
 
-Rodrigo Sierra, Alyson Perez y Ruth Benique.
+- Rodrigo Sierra
+- Alyson Perez
+- Ruth Benique
 
 ## Requisitos previos
 
@@ -42,6 +44,64 @@ docker exec -it farmacia_pg psql -U farmacia_user -d farmacia_db -c "SELECT eh_s
 
 ---
 
+## Visión general de la estructura
+
+```
+                         DIRECTORIO (global_depth = gd)
+                    2^gd punteros, indexados por los
+                    gd bits menos significativos del hash
+
+   slot 000  slot 001  slot 010  slot 011  slot 100  slot 101  slot 110  slot 111
+      |          |         |         |         |         |         |         |
+      v          v         v         v         v         v         v         v
+   +------+   +------+  +------+  +------+  +------+  +------+  +------+  +------+
+   |Bucket|   |Bucket|  |Bucket|  |Bucket|  |Bucket|  |Bucket|  |Bucket|  |Bucket|
+   |  A   |   |  B   |  |  B   |  |  C   |  |  A   |   |  B  |  |  B   |  |  C   |
+   | ld=3 |   | ld=2 |  | ld=2 |  | ld=3 |  | ld=3 |   | ld=2|  | ld=2 |  | ld=3 |
+   +------+   +------+  +------+  +------+  +------+  +------+  +------+  +------+
+
+   Nota: varios slots pueden apuntar al MISMO bucket cuando
+   local_depth (ld) del bucket es menor que global_depth (gd)
+   del directorio. En el ejemplo, Bucket B (ld=2) es apuntado
+   por 2 slots distintos (010 y 110, o 001 y 101), porque le
+   faltan bits para diferenciarse al nivel del directorio actual.
+```
+
+### Qué pasa al insertar en un bucket lleno
+
+```
+Caso 1: local_depth < global_depth  ->  SPLIT LOCAL
+  El bucket se divide en dos. Las entradas se redistribuyen
+  segun el bit adicional del hash. Solo se actualizan los
+  slots del directorio que apuntaban a ese bucket.
+
+Caso 2: local_depth == global_depth  ->  DUPLICAR DIRECTORIO + SPLIT
+  El directorio duplica su tamaño (2^gd -> 2^(gd+1)).
+  Los slots nuevos copian los punteros de los slots viejos.
+  Luego se realiza el split local como en el Caso 1.
+```
+
+---
+
+## Extendible Hashing vs. B-tree — comparación conceptual
+
+| Criterio | Extendible Hashing | B-tree |
+|---|---|---|
+| Tipo de consulta soportada | Solo igualdad (`=`) | Igualdad y rango |
+| Complejidad de búsqueda | O(1) promedio (acceso directo vía hash + directorio) | O(log n) |
+| Complejidad de inserción | O(1) amortizado; O(log n) en el peor caso si hay splits en cadena | O(log n) |
+| Peor caso de búsqueda | O(capacidad de bucket), si hay muchas colisiones en un mismo bucket | O(log n) garantizado (árbol balanceado) |
+| Crecimiento de la estructura | Dinámico: split de bucket + duplicación de directorio solo cuando hace falta | Balanceo automático en cada inserción |
+| Orden de las claves | No se mantiene orden (el hash dispersa las claves) | Mantiene orden total (permite recorridos ordenados y rangos) |
+| Tamaño en disco (resultado experimental propio) | Más compacto (~26-27% menor que B-tree en las pruebas realizadas) | Mayor, por overhead de nodos internos y balanceo |
+| Caso de uso ideal | Accesos puntuales por clave exacta (ej. búsqueda de un `id` específico) | Consultas por rango, ordenamiento, o cuando se necesita flexibilidad de tipo de consulta |
+
+**Ventaja principal de Extendible Hashing:** acceso casi directo (O(1)) a la clave buscada, sin necesidad de recorrer niveles como en un árbol, siempre que la función hash distribuya bien las claves.
+
+**Limitación principal:** al no mantener orden, no puede resolver consultas por rango ni ordenamientos — por diseño, solo soporta igualdad (ver sección 4 de la rúbrica, columna "Consulta principal").
+
+---
+
 ## Semana 1 — Propuesta inicial (entregada)
 
 Se definió la estructura elegida (Extendible Hashing) y se entregó la
@@ -52,13 +112,13 @@ propuesta formal, incluyendo: motivación, referencias (Fagin et al.
 en C), riesgos técnicos identificados y plan de trabajo semanal del
 equipo.
 
-**Archivo:** `Propuesta_Inicial.pdf` 
+**Archivo:** `Propuesta_Inicial.pdf`
 
 ---
 
 ## Semana 2 — Entorno + Prueba de concepto en C + Diseño de estructuras
 
-### Entorno de trabajo 
+### Entorno de trabajo
 Se configuró un proyecto Docker separado del repositorio de Software 2,
 con PostgreSQL 18.6 sobre contenedor Linux (cumpliendo la sección 8 de
 la rúbrica). Se tradujo el esquema original de MariaDB a PostgreSQL,
@@ -182,7 +242,7 @@ a `gd=5` según fue necesario.
 
 | Requisito | Cumplido |
 |---|---|
-| Explicar organización, operaciones, complejidad, ventajas, limitaciones | Sí — `diseno/*.md` |
+| Explicar organización, operaciones, complejidad, ventajas, limitaciones | Sí — `diseno/*.md` + tabla comparativa en este README |
 | Código propio para la estructura | Sí |
 | Construcción, búsqueda, inserción, split (mínimo exigido para Extendible Hashing) | Sí |
 | Integración real con PostgreSQL (no solo programa externo) | Sí — Extensión en C, `CREATE FUNCTION ... LANGUAGE C` |
