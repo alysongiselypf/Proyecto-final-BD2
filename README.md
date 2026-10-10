@@ -14,7 +14,7 @@ parcial práctico según la sección 5 de la rúbrica del curso.
 
 ## Integrantes
 
-- Rodrigo Sierra
+- Rodrigo Sierraa
 - Alyson Perez
 - Ruth Benique
 
