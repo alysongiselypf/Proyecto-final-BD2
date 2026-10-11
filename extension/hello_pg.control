@@ -1,0 +1,4 @@
+comment = 'hello world extension for BD2 project'
+default_version = '1.0'
+module_pathname = '$libdir/hello_pg'
+relocatable = true

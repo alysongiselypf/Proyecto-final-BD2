@@ -1,0 +1,4 @@
+comment = 'Extendible Hashing index extension for BD2 project'
+default_version = '1.0'
+module_pathname = '$libdir/eh_index'
+relocatable = true

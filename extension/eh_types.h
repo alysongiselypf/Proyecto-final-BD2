@@ -1,0 +1,30 @@
+#ifndef EH_TYPES_H
+#define EH_TYPES_H
+
+#include <stdint.h>
+
+#ifndef BUCKET_CAPACITY
+#define BUCKET_CAPACITY 4
+#endif
+
+
+typedef struct {
+    int32_t key;   // medicamento.id
+    int64_t tid;   // referencia al registro origen
+} Entry;
+
+typedef struct {
+    int id;              // debe estar aquí, como primera línea
+    int local_depth;
+    int count;
+    Entry entries[BUCKET_CAPACITY];
+} Bucket;
+
+typedef struct {
+    int id;
+    int global_depth;
+    int num_slots;
+    Bucket **slots;
+} Directory;
+
+#endif
