@@ -1,4 +1,5 @@
 #include "postgres.h"
+#include "eh_persist.h"
 #include "fmgr.h"
 #include "eh_types.h"
 #include "eh_insert_core.h"
@@ -18,7 +19,7 @@ eh_insert(PG_FUNCTION_ARGS)
 
     result = eh_directory_insert(g_index, key, (int64_t) key);
 
-    if (result == 0)
+        if (result == 0)
     {
         elog(NOTICE, "eh_insert: la clave %d ya existia, no se inserto de nuevo", key);
         PG_RETURN_BOOL(false);
@@ -28,6 +29,10 @@ eh_insert(PG_FUNCTION_ARGS)
         elog(WARNING, "eh_insert: no se pudo insertar la clave %d (limite de splits alcanzado)", key);
         PG_RETURN_BOOL(false);
     }
+
+    /* result == 1: persistir para que otras conexiones y reinicios vean la clave */
+    if (!eh_directory_save(g_index, EH_INDEX_FILE_PATH))
+        elog(WARNING, "eh_insert: clave %d indexada en memoria, pero fallo al persistir a disco", key);
 
     PG_RETURN_BOOL(true);
 }

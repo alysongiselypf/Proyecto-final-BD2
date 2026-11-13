@@ -60,4 +60,6 @@ eh_sync_trigger(PG_FUNCTION_ARGS)
                 break;
         }
     }
+
+    return PointerGetDatum(NULL);
  }

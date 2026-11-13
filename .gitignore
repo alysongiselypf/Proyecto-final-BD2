@@ -26,6 +26,8 @@ log.txt
 **/datasets/output/*.csv
 **/datasets/output/*.json
 **/datasets/output/graficos/*.png
+!**/datasets/output/resultados_*.json
+**/datasets/output/workload_*.json
 
 # Cache de Python
 __pycache__/
