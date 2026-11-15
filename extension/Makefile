@@ -5,6 +5,9 @@ OBJS = eh_hash.o eh_bucket.o eh_directory.o eh_split.o eh_insert_core.o eh_build
 EXTENSION = hello_pg eh_index
 DATA = hello_pg--1.0.sql eh_index--1.0.sql
 
+BUCKET_CAPACITY ?= 4
+PG_CPPFLAGS += -DBUCKET_CAPACITY=$(BUCKET_CAPACITY)
+
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
 include $(PGXS)

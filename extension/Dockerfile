@@ -7,5 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY extension/*.c extension/*.h extension/*.control extension/*.sql extension/Makefile /tmp/hello_pg/
 WORKDIR /tmp/hello_pg
-RUN make && make install
+ARG BUCKET_CAPACITY=4
+RUN make BUCKET_CAPACITY=$BUCKET_CAPACITY && make install
 

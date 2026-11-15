@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: extension/Dockerfile
+      args:
+        BUCKET_CAPACITY: ${BUCKET_CAPACITY:-4}
     container_name: farmacia_pg
     restart: unless-stopped
     environment:
