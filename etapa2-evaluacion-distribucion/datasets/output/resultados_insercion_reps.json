@@ -1,0 +1,1674 @@
+{
+  "configs": [
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        100000
+      ],
+      "inicio": "2026-11-14 20:34:30"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        100000
+      ],
+      "inicio": "2026-11-15 10:41:48"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        100000
+      ],
+      "inicio": "2026-11-15 10:53:02"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        100000
+      ],
+      "orden": "rotativo (cuadrado latino)",
+      "checkpoint_antes_de_medir": true,
+      "inicio": "2026-11-15 11:00:52"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        500000
+      ],
+      "orden": "rotativo (cuadrado latino)",
+      "checkpoint_antes_de_medir": true,
+      "inicio": "2026-11-15 16:42:46"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        1000000
+      ],
+      "orden": "rotativo (cuadrado latino)",
+      "checkpoint_antes_de_medir": true,
+      "inicio": "2026-11-15 17:39:20"
+    },
+    {
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "shared_buffers": "128MB",
+      "bucket_capacity": 64,
+      "repeticiones": 5,
+      "tama\u00f1os": [
+        100000
+      ],
+      "orden": "rotativo (cuadrado latino)",
+      "checkpoint_antes_de_medir": true,
+      "inicio": "2026-11-15 19:39:47"
+    }
+  ],
+  "repeticiones": [
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 60.26367249991745,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 61.32916199997999,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 71.70780470001046,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 66.73077629995532,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 68.05763110006228,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 62.026837099925615,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 72.65388290002011,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 66.10499990009703,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 67.10888529999647,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 60.28507270000409,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 73.22903389995918,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 65.95501349994447,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 66.83580310002435,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 60.43143680004869,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 61.10126480006147,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 66.2607567999512,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 67.72479950007983,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 62.13472699990962,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 61.02654180000536,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 69.01427230006084,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 66.80630559998099,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 60.877440799959004,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 61.40034339996055,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 72.43122549995314,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 67.10838710004464,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 60.422847200068645,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 62.2270907999482,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 71.97184869996272,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 66.72614110005088,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 68.4795957999304,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 62.32908709999174,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 71.79082639992703,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 66.51342550001573,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 68.62297639995813,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 60.7132795000216,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 73.1382345999591,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 66.69252409995534,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 68.2658400000073,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 60.98662310000509,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 61.78021679993253,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 67.77370160003193,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 68.17288339999504,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 59.991070899995975,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 61.59898220002651,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 69.67688820010517,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 69.12846829998307,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 61.34364400000777,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 62.54766399995424,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 73.53285249997862,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 500000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 67.69557779992465,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 121.79391250002664,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 123.99066769995261,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 142.5629255999811,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 133.480409199954,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 139.3355022999458,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 127.33310820010956,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 147.38481570000295,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 133.77882560004946,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 136.11281610000879,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 121.88653539994266,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 142.1409526000498,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 134.40938019996975,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 136.41638529999182,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 122.45672580006067,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 127.27011649997439,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 135.80989160004538,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 141.06551380001474,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 131.57307609997224,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 133.3364891000092,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 153.8134166999953,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 129.8849068999989,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 132.16933239996433,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 123.5843413999537,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 159.66288049996365,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 134.043994900072,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 119.05794769991189,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 135.5082366000861,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 150.85349599993788,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 140.09091160004027,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 143.60585900000297,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 131.5952606999781,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 149.50260870007332,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 138.96884499990847,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 152.0548915999243,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 130.45166720007546,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 155.17284149990883,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 127.12131499999668,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 145.59548820008058,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 129.93896239995956,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 128.65958950005006,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 144.20653650001623,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 141.35066640004516,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 117.60712810000405,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 130.0527565999655,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 149.7448202999076,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 142.73248969996348,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 123.62069110001903,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 124.40260909998324,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 141.06584259995725,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 1000000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 137.32264020002913,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 11.014698199927807,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 10.757074500084855,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 12.693442700081505,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 12.015409999992698,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 6.901861099991947,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 4.69310310005676,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 7.9458327000029385,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 5.375148999970406,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 6.06544939999003,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 7.068211799953133,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 3.8468246000120416,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 8.584414900047705,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 3.9074380999663845,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 11.341388700064272,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 10.872663000016473,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 11.761339400080033,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 11.809333799988963,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 9.749956300016493,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 10.356536800041795,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 12.22959730005823,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 11.26314330007881,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 9.963735299999826,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 10.178207300021313,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 12.459962700027972,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 11.352871399954893,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 1,
+      "pos": 1,
+      "segundos": 10.341345200082287,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 1,
+      "pos": 2,
+      "segundos": 11.388998099952005,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 1,
+      "pos": 3,
+      "segundos": 13.210894400021061,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 1,
+      "pos": 4,
+      "segundos": 10.708905300009064,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 1,
+      "pos": 5,
+      "segundos": 3.400725500076078,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 2,
+      "pos": 1,
+      "segundos": 12.123345999978483,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 2,
+      "pos": 2,
+      "segundos": 13.783393900026567,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 2,
+      "pos": 3,
+      "segundos": 12.389123699977063,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 2,
+      "pos": 4,
+      "segundos": 12.488622899982147,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 2,
+      "pos": 5,
+      "segundos": 10.511506700073369,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 3,
+      "pos": 1,
+      "segundos": 12.809898500097916,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 3,
+      "pos": 2,
+      "segundos": 12.342324499972165,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 3,
+      "pos": 3,
+      "segundos": 12.492171699996106,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 3,
+      "pos": 4,
+      "segundos": 10.692623800016008,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 3,
+      "pos": 5,
+      "segundos": 10.766555999987759,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 4,
+      "pos": 1,
+      "segundos": 11.61622979992535,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 4,
+      "pos": 2,
+      "segundos": 12.498116899980232,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 4,
+      "pos": 3,
+      "segundos": 10.527051500044763,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 4,
+      "pos": 4,
+      "segundos": 10.450294199981727,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 4,
+      "pos": 5,
+      "segundos": 12.524904899997637,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree_cte",
+      "rep": 5,
+      "pos": 1,
+      "segundos": 11.819460200029425,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice",
+      "rep": 5,
+      "pos": 2,
+      "segundos": 10.646340899984352,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "btree",
+      "rep": 5,
+      "pos": 3,
+      "segundos": 10.549314299947582,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh",
+      "rep": 5,
+      "pos": 4,
+      "segundos": 12.300994299934246,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "sin_indice_cte",
+      "rep": 5,
+      "pos": 5,
+      "segundos": 11.069907700060867,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 1,
+      "segundos": 94.33260780002456,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 2,
+      "segundos": 77.30670320009813,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 3,
+      "segundos": 117.17449090001173,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 4,
+      "segundos": 157.642302100081,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d1_secuencial",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 5,
+      "segundos": 101.90368569991551,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 1,
+      "segundos": 98.51862880005501,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 2,
+      "segundos": 117.58843450003769,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 3,
+      "segundos": 128.40165230003186,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 4,
+      "segundos": 125.08335920004174,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    },
+    {
+      "dataset": "d2_aleatorio",
+      "n": 100000,
+      "escenario": "eh_autosave",
+      "rep": 5,
+      "segundos": 132.92733850004151,
+      "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+      "bucket_capacity": 64
+    }
+  ]
+}

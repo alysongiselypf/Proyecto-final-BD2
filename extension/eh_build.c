@@ -7,6 +7,7 @@
 #include "eh_insert_core.h"
 #include "eh_persist.h"   // agregar a los includes existentes
 #include "utils/builtins.h"
+#include "utils/guc.h"
 
 PG_MODULE_MAGIC;
 
@@ -15,6 +16,7 @@ PG_FUNCTION_INFO_V1(eh_build_table);
 
 
 Directory *g_index = NULL;
+bool eh_autosave = true;
 
 Datum
 eh_build(PG_FUNCTION_ARGS)
@@ -78,16 +80,25 @@ eh_build(PG_FUNCTION_ARGS)
  * aprovechamos para cargar el indice desde disco sin que el usuario
  * tenga que llamar eh_load() manualmente en cada conexion nueva.
  */
-void
-_PG_init(void)
-{
-    g_index = eh_directory_load(EH_INDEX_FILE_PATH);
-    if (g_index != NULL)
-        elog(LOG, "eh_index: indice cargado automaticamente desde disco (gd=%d, slots=%d)",
-             g_index->global_depth, g_index->num_slots);
-    else
-        elog(LOG, "eh_index: no se encontro indice persistido, se requiere SELECT eh_build();");
-}
+ void
+ _PG_init(void)
+ {
+     DefineCustomBoolVariable("eh.autosave",
+                              "Guardar el indice a disco tras cada insercion.",
+                              NULL,
+                              &eh_autosave,
+                              true,
+                              PGC_USERSET,
+                              0,
+                              NULL, NULL, NULL);
+ 
+     g_index = eh_directory_load(EH_INDEX_FILE_PATH);
+     if (g_index != NULL)
+         elog(LOG, "eh_index: indice cargado automaticamente desde disco (gd=%d, slots=%d)",
+              g_index->global_depth, g_index->num_slots);
+     else
+         elog(LOG, "eh_index: no se encontro indice persistido, se requiere SELECT eh_build();");
+ }
 
 
 /*

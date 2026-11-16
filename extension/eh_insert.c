@@ -5,6 +5,7 @@
 #include "eh_insert_core.h"
 
 extern Directory *g_index; // definida en eh_build.c
+extern bool eh_autosave;
 
 PG_FUNCTION_INFO_V1(eh_insert);
 
@@ -31,7 +32,7 @@ eh_insert(PG_FUNCTION_ARGS)
     }
 
     /* result == 1: persistir para que otras conexiones y reinicios vean la clave */
-    if (!eh_directory_save(g_index, EH_INDEX_FILE_PATH))
+    if (eh_autosave && !eh_directory_save(g_index, EH_INDEX_FILE_PATH))
         elog(WARNING, "eh_insert: clave %d indexada en memoria, pero fallo al persistir a disco", key);
 
     PG_RETURN_BOOL(true);
