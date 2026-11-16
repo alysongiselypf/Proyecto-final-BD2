@@ -1,26 +1,15 @@
 """
-Genera 1,000,000+ registros de 'pedido' (relacion principal) y los
-distribuye en 3 nodos usando dos estrategias distintas, para comparar
-segun la seccion 6.3 de la rubrica.
-
-Estrategia 1 (RANGO/horizontal): pedido.id 1..333333 -> nodeA
-                                   333334..666666 -> nodeB
-                                   666667..1000000 -> nodeC
-
-Estrategia 2 (HASH): pedido.id % 3 == 0 -> nodeA
-                       pedido.id % 3 == 1 -> nodeB
-                       pedido.id % 3 == 2 -> nodeC
-
-Replicacion: 'medicamento' (tabla pequeña, muy consultada) se replica
-COMPLETA en los 3 nodos, para que las consultas de detalle_pedido
-JOIN medicamento puedan resolverse localmente sin cruzar nodos.
-'usuario' tambien se replica completa (pequeña, referenciada por pedido).
-
-Requiere: pip install psycopg2-binary
+Genera pedido (1 000 000 filas) y detalle_pedido (1 a 3 lineas por pedido)
+y los distribuye en 3 nodos con la estrategia indicada. Usa COPY.
+  RANGO: id 1..333333 -> A, 333334..666666 -> B, 666667..1000000 -> C
+  HASH : id % 3 == 0 -> A, 1 -> B, 2 -> C
+detalle_pedido sigue siempre el nodo de su pedido (JOIN local).
+usuario y medicamento se replican completos en los 3 nodos.
+Cada ejecucion vacia las tablas de los 3 nodos antes de cargar.
+Uso: python fragment_data.py [rango|hash]
 """
+import sys, io, random, time
 import psycopg2
-import random
-import time
 
 SEED = 272
 N_PEDIDOS = 1_000_000
@@ -28,92 +17,81 @@ N_USUARIOS = 5_000
 N_MEDICAMENTOS = 100
 
 NODES = {
-    "A": {"host": "localhost", "port": 5433, "dbname": "farmacia_db", "user": "farmacia_user", "password": "farmacia_pass"},
-    "B": {"host": "localhost", "port": 5434, "dbname": "farmacia_db", "user": "farmacia_user", "password": "farmacia_pass"},
-    "C": {"host": "localhost", "port": 5435, "dbname": "farmacia_db", "user": "farmacia_user", "password": "farmacia_pass"},
+    "A": {"host": "localhost", "port": 5433},
+    "B": {"host": "localhost", "port": 5434},
+    "C": {"host": "localhost", "port": 5435},
 }
+for cfg in NODES.values():
+    cfg.update(dbname="farmacia_db", user="farmacia_user", password="farmacia_pass")
 
-def conectar(node):
-    return psycopg2.connect(**NODES[node])
+def nodo_rango(pid):
+    t = N_PEDIDOS // 3
+    return "A" if pid <= t else ("B" if pid <= 2 * t else "C")
 
-def replicar_tabla_completa(tabla, filas, columnas):
-    """Inserta las mismas filas en los 3 nodos (replicacion completa)."""
-    for node in ["A", "B", "C"]:
-        conn = conectar(node)
-        cur = conn.cursor()
-        cols = ", ".join(columnas)
-        placeholders = ", ".join(["%s"] * len(columnas))
-        cur.executemany(f"INSERT INTO {tabla} ({cols}) VALUES ({placeholders})", filas)
-        conn.commit()
-        conn.close()
-    print(f"Replicado '{tabla}': {len(filas)} filas en los 3 nodos")
+def nodo_hash(pid):
+    return ("A", "B", "C")[pid % 3]
 
-def generar_usuarios_y_medicamentos():
+ESTRATEGIAS = {"rango": nodo_rango, "hash": nodo_hash}
+
+def copiar(cur, tabla, columnas, buf):
+    buf.seek(0)
+    cur.copy_expert(f"COPY {tabla} ({', '.join(columnas)}) FROM STDIN WITH CSV", buf)
+
+def main(estrategia):
+    asignar = ESTRATEGIAS[estrategia]
     rng = random.Random(SEED)
+    t0 = time.time()
+
+    conns = {n: psycopg2.connect(**cfg) for n, cfg in NODES.items()}
+    for c in conns.values():
+        c.cursor().execute("TRUNCATE detalle_pedido, pedido, medicamento, usuario CASCADE;")
+        c.commit()
+
+    # Tablas replicadas (mismo contenido en los 3 nodos)
     usuarios = [(i, f"Nombre{i}", f"Apellido{i}") for i in range(1, N_USUARIOS + 1)]
-    medicamentos = [(i, f"Medicamento{i}", round(rng.uniform(5, 100), 2)) for i in range(1, N_MEDICAMENTOS + 1)]
-    replicar_tabla_completa("usuario", usuarios, ["id", "nombres", "apellidos"])
-    replicar_tabla_completa("medicamento", medicamentos, ["id", "nombre", "precio"])
+    meds = [(i, f"Medicamento{i}", round(rng.uniform(5, 100), 2)) for i in range(1, N_MEDICAMENTOS + 1)]
+    precio = {m[0]: m[2] for m in meds}
+    for c in conns.values():
+        cur = c.cursor()
+        b = io.StringIO(); [b.write(f"{u[0]},{u[1]},{u[2]}\n") for u in usuarios]
+        copiar(cur, "usuario", ["id", "nombres", "apellidos"], b)
+        b = io.StringIO(); [b.write(f"{m[0]},{m[1]},{m[2]}\n") for m in meds]
+        copiar(cur, "medicamento", ["id", "nombre", "precio"], b)
+        c.commit()
 
-def fragmentar_por_rango():
-    """Estrategia 1: fragmentacion horizontal por rango de id."""
-    rng = random.Random(SEED)
-    tercio = N_PEDIDOS // 3
-    asignaciones = {"A": [], "B": [], "C": []}
-
+    # Tablas fragmentadas
+    bp = {n: io.StringIO() for n in NODES}
+    bd = {n: io.StringIO() for n in NODES}
+    did = 0
     for pid in range(1, N_PEDIDOS + 1):
+        nodo = asignar(pid)
         id_usuario = rng.randint(1, N_USUARIOS)
-        total = round(rng.uniform(10, 500), 2)
-        fila = (pid, id_usuario, "2026-01-01", total)
-        if pid <= tercio:
-            asignaciones["A"].append(fila)
-        elif pid <= tercio * 2:
-            asignaciones["B"].append(fila)
-        else:
-            asignaciones["C"].append(fila)
+        total = 0.0
+        for _ in range(rng.randint(1, 3)):
+            did += 1
+            med = rng.randint(1, N_MEDICAMENTOS)
+            cant = rng.randint(1, 5)
+            sub = round(precio[med] * cant, 2)
+            total += sub
+            bd[nodo].write(f"{did},{pid},{med},{cant},{sub}\n")
+        bp[nodo].write(f"{pid},{id_usuario},2026-01-01,{round(total, 2)}\n")
 
-    for node, filas in asignaciones.items():
-        conn = conectar(node)
-        cur = conn.cursor()
-        cur.execute("DELETE FROM pedido;")
-        cur.executemany("INSERT INTO pedido (id, id_usuario, fecha, total) VALUES (%s,%s,%s,%s)", filas)
-        conn.commit()
-        conn.close()
-        print(f"[RANGO] Node {node}: {len(filas)} pedidos")
-
-def fragmentar_por_hash():
-    """Estrategia 2: fragmentacion por hash (modulo 3)."""
-    rng = random.Random(SEED)
-    asignaciones = {"A": [], "B": [], "C": []}
-    node_por_mod = {0: "A", 1: "B", 2: "C"}
-
-    for pid in range(1, N_PEDIDOS + 1):
-        id_usuario = rng.randint(1, N_USUARIOS)
-        total = round(rng.uniform(10, 500), 2)
-        fila = (pid, id_usuario, "2026-01-01", total)
-        node = node_por_mod[pid % 3]
-        asignaciones[node].append(fila)
-
-    for node, filas in asignaciones.items():
-        conn = conectar(node)
-        cur = conn.cursor()
-        cur.execute("DELETE FROM pedido;")
-        cur.executemany("INSERT INTO pedido (id, id_usuario, fecha, total) VALUES (%s,%s,%s,%s)", filas)
-        conn.commit()
-        conn.close()
-        print(f"[HASH] Node {node}: {len(filas)} pedidos")
+    for n, c in conns.items():
+        cur = c.cursor()
+        copiar(cur, "pedido", ["id", "id_usuario", "fecha", "total"], bp[n])
+        copiar(cur, "detalle_pedido", ["id", "id_pedido", "id_medicamento", "cantidad", "subtotal"], bd[n])
+        c.commit()
+        cur.execute("SELECT count(*), min(id), max(id) FROM pedido;")
+        p = cur.fetchone()
+        cur.execute("SELECT count(*) FROM detalle_pedido;")
+        print(f"[{estrategia.upper()}] nodo {n}: pedidos={p[0]} (id {p[1]}..{p[2]}) detalles={cur.fetchone()[0]}")
+        c.close()
+    print(f"Listo en {time.time() - t0:.1f}s")
 
 if __name__ == "__main__":
-    import sys
-    estrategia = sys.argv[1] if len(sys.argv) > 1 else "rango"
+    est = sys.argv[1] if len(sys.argv) > 1 else "rango"
+    if est not in ESTRATEGIAS:
+        print("Uso: python fragment_data.py [rango|hash]"); sys.exit(1)
+    main(est)
 
-    if estrategia == "rango":
-        print("--- Replicando usuario y medicamento (tablas pequeñas) ---")
-        generar_usuarios_y_medicamentos()
-        print("\n--- Estrategia 1: fragmentacion por RANGO ---")
-        fragmentar_por_rango()
-    elif estrategia == "hash":
-        print("--- Estrategia 2: fragmentacion por HASH ---")
-        fragmentar_por_hash()
-    else:
-        print("Uso: python fragment_data.py [rango|hash]")
+
