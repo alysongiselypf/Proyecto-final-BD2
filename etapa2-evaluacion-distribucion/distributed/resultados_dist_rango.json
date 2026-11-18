@@ -1,0 +1,538 @@
+{
+  "config": {
+    "estrategia": "rango",
+    "pg": "18.6 (Debian 18.6-1.pgdg13+2)",
+    "reps": 5,
+    "n_ops": 1000,
+    "n_rangos": 200,
+    "n_joins": 100,
+    "seed": 272,
+    "latencias_ms": {
+      "A-B": 20,
+      "A-C": 40,
+      "B-C": 25
+    },
+    "latencia_escala": 1.0,
+    "p_lectura": 0.7,
+    "p_replicada": 0.2,
+    "hotspot": {
+      "fraccion_ids": 0.1,
+      "p_acceso": 0.8
+    },
+    "ancho_rango_agg": 10000,
+    "ancho_rango_filas": 1000,
+    "inicio": "2026-11-16 21:39:23"
+  },
+  "repeticiones": [
+    {
+      "rep": 1,
+      "mezcla_uniforme": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 52.154,
+        "p95_ms": 80.803,
+        "frac_local": 0.394,
+        "media_local_ms": 34.801,
+        "media_remota_ms": 63.436,
+        "ops_por_s": 19.16,
+        "max_share": 0.3589,
+        "carga_A": 0.3501,
+        "carga_B": 0.3589,
+        "carga_C": 0.291
+      },
+      "mezcla_concentrada": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 53.08,
+        "p95_ms": 82.068,
+        "frac_local": 0.429,
+        "media_local_ms": 35.321,
+        "media_remota_ms": 66.422,
+        "ops_por_s": 18.83,
+        "max_share": 0.7191,
+        "carga_A": 0.1369,
+        "carga_B": 0.144,
+        "carga_C": 0.7191
+      },
+      "rango_agregado": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 59.339,
+        "p95_ms": 89.866,
+        "nodos_media": 1.015,
+        "filas_recibidas_media": 1.0
+      },
+      "rango_filas": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 55.301,
+        "p95_ms": 79.992,
+        "nodos_media": 1.005,
+        "filas_recibidas_media": 1000
+      },
+      "join_multinodo": {
+        "consultas": 100,
+        "ok": 1.0,
+        "media_ms": 124.879
+      },
+      "nodo_caido": {
+        "ops": 1000,
+        "ok": 0.718,
+        "parciales": 52,
+        "media_ms": 661.798,
+        "p95_ms": 4148.095,
+        "frac_local": 0.4428969359331476,
+        "media_local_ms": 747.762,
+        "media_remota_ms": 593.457,
+        "ops_por_s": 0.61,
+        "max_share": 0.3524,
+        "carga_A": 0.3234,
+        "carga_B": 0.3524,
+        "carga_C": 0.3243,
+        "ok_pedido_escritura": 0.6157,
+        "ok_pedido_lectura": 0.6601,
+        "ok_replicada_escritura": 1.0,
+        "ok_replicada_lectura": 1.0,
+        "rango_agregado": {
+          "consultas": 100,
+          "ok": 0.63,
+          "incorrectas": 0,
+          "media_ms": 64.61,
+          "p95_ms": 94.343,
+          "nodos_media": 1,
+          "filas_recibidas_media": 1
+        },
+        "recuperacion_s": 1.69
+      }
+    },
+    {
+      "rep": 2,
+      "mezcla_uniforme": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 55.855,
+        "p95_ms": 86.99,
+        "frac_local": 0.385,
+        "media_local_ms": 35.693,
+        "media_remota_ms": 68.477,
+        "ops_por_s": 17.89,
+        "max_share": 0.3378,
+        "carga_A": 0.3262,
+        "carga_B": 0.336,
+        "carga_C": 0.3378
+      },
+      "mezcla_concentrada": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 56.501,
+        "p95_ms": 87.805,
+        "frac_local": 0.407,
+        "media_local_ms": 36.675,
+        "media_remota_ms": 70.108,
+        "ops_por_s": 17.68,
+        "max_share": 0.6945,
+        "carga_A": 0.1514,
+        "carga_B": 0.154,
+        "carga_C": 0.6945
+      },
+      "rango_agregado": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 62.869,
+        "p95_ms": 92.077,
+        "nodos_media": 1.035,
+        "filas_recibidas_media": 1.0
+      },
+      "rango_filas": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 61.677,
+        "p95_ms": 93.887,
+        "nodos_media": 1.005,
+        "filas_recibidas_media": 1000
+      },
+      "join_multinodo": {
+        "consultas": 100,
+        "ok": 1.0,
+        "media_ms": 137.161
+      },
+      "nodo_caido": {
+        "ops": 1000,
+        "ok": 0.743,
+        "parciales": 64,
+        "media_ms": 4299.672,
+        "p95_ms": 4133.944,
+        "frac_local": 0.4158815612382234,
+        "media_local_ms": 9407.434,
+        "media_remota_ms": 663.039,
+        "ops_por_s": 0.24,
+        "max_share": 0.3466,
+        "carga_A": 0.3466,
+        "carga_B": 0.3236,
+        "carga_C": 0.3298,
+        "ok_pedido_escritura": 0.6457,
+        "ok_pedido_lectura": 0.6919,
+        "ok_replicada_escritura": 1.0,
+        "ok_replicada_lectura": 1.0,
+        "rango_agregado": {
+          "consultas": 100,
+          "ok": 0.61,
+          "incorrectas": 0,
+          "media_ms": 70.238,
+          "p95_ms": 91.174,
+          "nodos_media": 1,
+          "filas_recibidas_media": 1
+        },
+        "recuperacion_s": 1.45
+      }
+    },
+    {
+      "rep": 3,
+      "mezcla_uniforme": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 42.432,
+        "p95_ms": 92.435,
+        "frac_local": 0.418,
+        "media_local_ms": 24.389,
+        "media_remota_ms": 55.391,
+        "ops_por_s": 23.56,
+        "max_share": 0.3452,
+        "carga_A": 0.3361,
+        "carga_B": 0.3188,
+        "carga_C": 0.3452
+      },
+      "mezcla_concentrada": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 58.014,
+        "p95_ms": 89.345,
+        "frac_local": 0.42,
+        "media_local_ms": 38.849,
+        "media_remota_ms": 71.893,
+        "ops_por_s": 17.22,
+        "max_share": 0.7259,
+        "carga_A": 0.1321,
+        "carga_B": 0.142,
+        "carga_C": 0.7259
+      },
+      "rango_agregado": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 62.552,
+        "p95_ms": 91.724,
+        "nodos_media": 1.035,
+        "filas_recibidas_media": 1.0
+      },
+      "rango_filas": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 59.017,
+        "p95_ms": 89.102,
+        "nodos_media": 1.01,
+        "filas_recibidas_media": 1000
+      },
+      "join_multinodo": {
+        "consultas": 100,
+        "ok": 1.0,
+        "media_ms": 152.768
+      },
+      "nodo_caido": {
+        "ops": 1000,
+        "ok": 0.722,
+        "parciales": 58,
+        "media_ms": 655.695,
+        "p95_ms": 4128.962,
+        "frac_local": 0.41412742382271467,
+        "media_local_ms": 699.307,
+        "media_remota_ms": 624.867,
+        "ops_por_s": 0.62,
+        "max_share": 0.3441,
+        "carga_A": 0.328,
+        "carga_B": 0.3441,
+        "carga_C": 0.328,
+        "ok_pedido_escritura": 0.6596,
+        "ok_pedido_lectura": 0.6545,
+        "ok_replicada_escritura": 1.0,
+        "ok_replicada_lectura": 1.0,
+        "rango_agregado": {
+          "consultas": 100,
+          "ok": 0.69,
+          "incorrectas": 0,
+          "media_ms": 67.235,
+          "p95_ms": 94.716,
+          "nodos_media": 1,
+          "filas_recibidas_media": 1
+        },
+        "recuperacion_s": 1.43
+      }
+    },
+    {
+      "rep": 4,
+      "mezcla_uniforme": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 58.397,
+        "p95_ms": 94.84,
+        "frac_local": 0.407,
+        "media_local_ms": 39.875,
+        "media_remota_ms": 71.109,
+        "ops_por_s": 17.11,
+        "max_share": 0.3394,
+        "carga_A": 0.324,
+        "carga_B": 0.3366,
+        "carga_C": 0.3394
+      },
+      "mezcla_concentrada": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 61.107,
+        "p95_ms": 96.322,
+        "frac_local": 0.419,
+        "media_local_ms": 40.832,
+        "media_remota_ms": 75.729,
+        "ops_por_s": 16.35,
+        "max_share": 0.7043,
+        "carga_A": 0.143,
+        "carga_B": 0.1528,
+        "carga_C": 0.7043
+      },
+      "rango_agregado": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 69.326,
+        "p95_ms": 106.672,
+        "nodos_media": 1.01,
+        "filas_recibidas_media": 1.0
+      },
+      "rango_filas": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 52.221,
+        "p95_ms": 90.474,
+        "nodos_media": 1.005,
+        "filas_recibidas_media": 1000
+      },
+      "join_multinodo": {
+        "consultas": 100,
+        "ok": 1.0,
+        "media_ms": 159.702
+      },
+      "nodo_caido": {
+        "ops": 1000,
+        "ok": 0.714,
+        "parciales": 53,
+        "media_ms": 601.372,
+        "p95_ms": 4122.363,
+        "frac_local": 0.44537815126050423,
+        "media_local_ms": 585.813,
+        "media_remota_ms": 613.865,
+        "ops_por_s": 0.63,
+        "max_share": 0.3445,
+        "carga_A": 0.321,
+        "carga_B": 0.3445,
+        "carga_C": 0.3345,
+        "ok_pedido_escritura": 0.6626,
+        "ok_pedido_lectura": 0.6506,
+        "ok_replicada_escritura": 1.0,
+        "ok_replicada_lectura": 1.0,
+        "rango_agregado": {
+          "consultas": 100,
+          "ok": 0.74,
+          "incorrectas": 0,
+          "media_ms": 69.853,
+          "p95_ms": 98.463,
+          "nodos_media": 1,
+          "filas_recibidas_media": 1
+        },
+        "recuperacion_s": 1.72
+      }
+    },
+    {
+      "rep": 5,
+      "mezcla_uniforme": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 59.541,
+        "p95_ms": 91.398,
+        "frac_local": 0.38,
+        "media_local_ms": 40.065,
+        "media_remota_ms": 71.478,
+        "ops_por_s": 16.78,
+        "max_share": 0.3478,
+        "carga_A": 0.3212,
+        "carga_B": 0.331,
+        "carga_C": 0.3478
+      },
+      "mezcla_concentrada": {
+        "ops": 1000,
+        "ok": 1.0,
+        "parciales": 0,
+        "media_ms": 59.695,
+        "p95_ms": 93.181,
+        "frac_local": 0.406,
+        "media_local_ms": 39.738,
+        "media_remota_ms": 73.336,
+        "ops_por_s": 16.74,
+        "max_share": 0.7177,
+        "carga_A": 0.1442,
+        "carga_B": 0.1381,
+        "carga_C": 0.7177
+      },
+      "rango_agregado": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 68.145,
+        "p95_ms": 98.414,
+        "nodos_media": 1.02,
+        "filas_recibidas_media": 1.0
+      },
+      "rango_filas": {
+        "consultas": 200,
+        "ok": 1.0,
+        "incorrectas": 0,
+        "media_ms": 63.03,
+        "p95_ms": 89.3,
+        "nodos_media": 1,
+        "filas_recibidas_media": 1000
+      },
+      "join_multinodo": {
+        "consultas": 100,
+        "ok": 1.0,
+        "media_ms": 158.671
+      },
+      "nodo_caido": {
+        "ops": 1000,
+        "ok": 0.71,
+        "parciales": 51,
+        "media_ms": 649.332,
+        "p95_ms": 4128.121,
+        "frac_local": 0.46056338028169014,
+        "media_local_ms": 694.647,
+        "media_remota_ms": 610.643,
+        "ops_por_s": 0.61,
+        "max_share": 0.3566,
+        "carga_A": 0.3285,
+        "carga_B": 0.3566,
+        "carga_C": 0.3149,
+        "ok_pedido_escritura": 0.6736,
+        "ok_pedido_lectura": 0.6221,
+        "ok_replicada_escritura": 1.0,
+        "ok_replicada_lectura": 1.0,
+        "rango_agregado": {
+          "consultas": 100,
+          "ok": 0.67,
+          "incorrectas": 0,
+          "media_ms": 75.809,
+          "p95_ms": 116.758,
+          "nodos_media": 1,
+          "filas_recibidas_media": 1
+        },
+        "recuperacion_s": 1.72
+      }
+    }
+  ],
+  "resumen_mediana": {
+    "rep": 3,
+    "mezcla_uniforme": {
+      "ops": 1000,
+      "ok": 1.0,
+      "parciales": 0,
+      "media_ms": 55.855,
+      "p95_ms": 91.398,
+      "frac_local": 0.394,
+      "media_local_ms": 35.693,
+      "media_remota_ms": 68.477,
+      "ops_por_s": 17.89,
+      "max_share": 0.3452,
+      "carga_A": 0.3262,
+      "carga_B": 0.336,
+      "carga_C": 0.3394
+    },
+    "mezcla_concentrada": {
+      "ops": 1000,
+      "ok": 1.0,
+      "parciales": 0,
+      "media_ms": 58.014,
+      "p95_ms": 89.345,
+      "frac_local": 0.419,
+      "media_local_ms": 38.849,
+      "media_remota_ms": 71.893,
+      "ops_por_s": 17.22,
+      "max_share": 0.7177,
+      "carga_A": 0.143,
+      "carga_B": 0.144,
+      "carga_C": 0.7177
+    },
+    "rango_agregado": {
+      "consultas": 200,
+      "ok": 1.0,
+      "incorrectas": 0,
+      "media_ms": 62.869,
+      "p95_ms": 92.077,
+      "nodos_media": 1.02,
+      "filas_recibidas_media": 1.0
+    },
+    "rango_filas": {
+      "consultas": 200,
+      "ok": 1.0,
+      "incorrectas": 0,
+      "media_ms": 59.017,
+      "p95_ms": 89.3,
+      "nodos_media": 1.005,
+      "filas_recibidas_media": 1000
+    },
+    "join_multinodo": {
+      "consultas": 100,
+      "ok": 1.0,
+      "media_ms": 152.768
+    },
+    "nodo_caido": {
+      "ops": 1000,
+      "ok": 0.718,
+      "parciales": 53,
+      "media_ms": 655.695,
+      "p95_ms": 4128.962,
+      "frac_local": 0.4429,
+      "media_local_ms": 699.307,
+      "media_remota_ms": 613.865,
+      "ops_por_s": 0.61,
+      "max_share": 0.3466,
+      "carga_A": 0.328,
+      "carga_B": 0.3445,
+      "carga_C": 0.328,
+      "ok_pedido_escritura": 0.6596,
+      "ok_pedido_lectura": 0.6545,
+      "ok_replicada_escritura": 1.0,
+      "ok_replicada_lectura": 1.0,
+      "rango_agregado": {
+        "consultas": 100,
+        "ok": 0.67,
+        "incorrectas": 0,
+        "media_ms": 69.853,
+        "p95_ms": 94.716,
+        "nodos_media": 1,
+        "filas_recibidas_media": 1
+      },
+      "recuperacion_s": 1.69
+    }
+  }
+}
