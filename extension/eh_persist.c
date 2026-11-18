@@ -1,4 +1,5 @@
 #include "eh_persist.h"
+#include "eh_bucket.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -123,8 +124,14 @@ Directory *eh_directory_load(const char *path)
     for (i = 0; i < dir->num_slots; i++)
         dir->slots[i] = by_id[slot_bucket_id[i]];
 
+    /* El contador de ids debe continuar despues del mayor id cargado; si no,
+       el siguiente split reutiliza un id existente y se pierden entradas al guardar. */
+    bucket_set_id_counter(max_id + 1);
+
     free(slot_bucket_id);
     free(by_id);
     fclose(f);
     return dir;
 }
+
+

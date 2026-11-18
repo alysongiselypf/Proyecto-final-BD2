@@ -62,4 +62,9 @@ void bucket_reset_id_counter(void) {
     g_next_bucket_id = 0;
 }
 
+void bucket_set_id_counter(int next_id) {
+    g_next_bucket_id = next_id;
+}
+
+
 
