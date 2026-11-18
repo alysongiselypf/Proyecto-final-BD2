@@ -327,3 +327,39 @@ del equipo.
 
 
 
+
+## Modos de ejecución
+
+**Demostración (buckets de 4 entradas, por defecto).**
+```
+docker compose up -d --build
+docker exec -it farmacia_pg psql -U farmacia_user -d farmacia_db -c "SELECT eh_build();"
+```
+Debe responder `gd=5, slots=32` con las 23 filas de `medicamento`.
+
+**Mediciones (buckets de 64 entradas).**
+```
+$env:BUCKET_CAPACITY = 64          # PowerShell
+docker compose down -v
+docker compose build
+docker compose up -d --wait
+```
+Con 64, `SELECT eh_build();` da `gd=2, slots=4`. Instalar las dependencias con
+`pip install -r requirements.txt`. Después, desde `etapa2-evaluacion-distribucion/datasets/workloads`:
+`python benchmark_runner.py 100000 500000 1000000` (búsqueda) y
+`python measure_insertion.py 100000 500000 1000000` (inserción). Los datos de entrada se generan con
+los scripts de `datasets/generators` y `datasets/workloads` (semilla 272) y se validan con
+`datasets/validate/check_workloads.py`; no se versionan. Para volver a la demostración, quitar la variable
+y reconstruir con `docker compose down -v` y `docker compose build`.
+
+**Parte distribuida** (`etapa2-evaluacion-distribucion/distributed`).
+```
+docker compose -f docker-compose-distributed.yml up -d --wait
+python fragment_data.py rango
+python run_distributed_tests.py rango
+python fragment_data.py hash
+python run_distributed_tests.py hash
+python run_distributed_tests.py comparar
+```
+
+El informe final está en `etapa2-evaluacion-distribucion/informe/informe_etapa2.md`.
